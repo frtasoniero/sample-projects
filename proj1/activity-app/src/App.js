@@ -36,6 +36,16 @@ function App() {
     setActivities([...activities, {...activity}]);
   };
 
+  function editActivity(id) {
+
+  }
+
+  function deleteActivity(id) {
+    const activitiesFilter = activities.filter(item => item.id !== id);
+
+    setActivities([...activitiesFilter]);
+  }
+
   function priorityValue(value) {
     switch (value) {
       case "1":
@@ -135,11 +145,11 @@ function App() {
               </div>
               <p className="card-text">{item.description}</p>
               <div className="d-flex justify-content-end pt-2 m-0 border-top">
-                <button className="btn btn-sm btn-outline-primary me-2">
+                <button className="btn btn-sm btn-outline-primary me-2" onClick={() => editActivity(item.id)}>
                   <i className="fas fa-pen me-2"></i>
                   edit
                 </button>
-                <button className="btn btn-sm btn-outline-danger">
+                <button className="btn btn-sm btn-outline-danger" onClick={() => deleteActivity(item.id)}>
                   <i className="fas fa-trash me-2"></i> 
                   delete
                 </button>
