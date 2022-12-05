@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import ActivityForm from './components/ActivityForm'
 import ActivityList from './components/ActivityList'
@@ -18,28 +18,23 @@ let initialState = [
   }
 ];
 
-let currentId = initialState[initialState.length - 1].id + 1;
-
 function App() {
+  const [index, setIndex] = useState(0);
   const [activities, setActivities] = useState(initialState);
+  const [activity, setActivity] = useState({id: 0});
 
-  function addAcitivity(e) {
-    e.preventDefault();
+  useEffect(() => {
+    activities.length <= 0 ? setIndex(1) : setIndex(Math.max.apply(Math, activities.map(val => val.id)) + 1);
+  }, [activities]);
 
-    const activity = {
-      id: document.getElementById('id').value,
-      title: document.getElementById('title').value,
-      priority: document.getElementById('priority').value,
-      description: document.getElementById('description').value,
-    };
-
-    currentId++;
-
-    setActivities([...activities, {...activity}]);
+  function addActivity(activity) {
+    setActivities([...activities, { ...activity, id: index }]);
   };
 
   function editActivity(id) {
+    const activityFilter = activities.filter(item => item.id === id);
 
+    setActivity(activityFilter[0]);
   }
 
   function deleteActivity(id) {
@@ -48,11 +43,23 @@ function App() {
     setActivities([...activitiesFilter]);
   }
 
+  function updateActivity(activity) {
+    setActivities(activities.map((item) => (item.id === activity.id ? activity : item)));
+    setActivity({id: 0});
+  }
+
+  function cancelActivity() {
+    setActivity({id: 0});
+  }
+
   return (
     <>
-      <ActivityForm 
-        addAcitivity={addAcitivity}
-        currentId={currentId}
+      <ActivityForm
+        activities={activities}
+        addActivity={addActivity}
+        selectedActivity={activity}
+        updateActivity={updateActivity}
+        cancelActivity={cancelActivity}
       />
       <ActivityList 
         activities={activities}
