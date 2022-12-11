@@ -2,33 +2,30 @@ import { useState, useEffect } from 'react';
 import './App.css';
 import ActivityForm from './components/ActivityForm'
 import ActivityList from './components/ActivityList'
+import api from './api/activity'
 
-let initialState = [
-  {
-    id: 1,
-    description: 'Book One',
-    priority: "1",
-    title: 'Lord of the Rings',
-  },
-  {
-    id: 2,
-    description: 'Book Two',
-    priority: "2",
-    title: 'The Dark Tower',
-  }
-];
+let initialState = [];
 
 function App() {
-  const [index, setIndex] = useState(0);
   const [activities, setActivities] = useState(initialState);
   const [activity, setActivity] = useState({id: 0});
 
-  useEffect(() => {
-    activities.length <= 0 ? setIndex(1) : setIndex(Math.max.apply(Math, activities.map(val => val.id)) + 1);
-  }, [activities]);
+  const getAllActivities = async () => {
+    const response = await api.get('Activity');
+    return response.data;
+  }
 
-  function addActivity(activity) {
-    setActivities([...activities, { ...activity, id: index }]);
+  useEffect(() => {
+    const getActivities = async () => {
+      const allActivities = await getAllActivities();
+      if (allActivities) setActivities(allActivities);
+    }
+    getActivities();
+  }, []);
+
+  const addActivity = async (activity) => {
+    const response = await api.post('Activity', activity);
+    setActivities([...activities, response.data]);
   };
 
   function editActivity(id) {
@@ -37,14 +34,16 @@ function App() {
     setActivity(activityFilter[0]);
   }
 
-  function deleteActivity(id) {
-    const activitiesFilter = activities.filter(item => item.id !== id);
-
-    setActivities([...activitiesFilter]);
+  const deleteActivity = async (id) => {
+    if (await api.delete(`Activity/${id}`)) {
+      const activitiesFilter = activities.filter(item => item.id !== id);
+      setActivities([...activitiesFilter]);
+    }
   }
 
-  function updateActivity(activity) {
-    setActivities(activities.map((item) => (item.id === activity.id ? activity : item)));
+  const updateActivity = async (activity) => {
+    const response = await api.put(`Activity/${activity.id}`, activity);
+    setActivities(activities.map((item) => (item.id === response.data.id ? response.data : item)));
     setActivity({id: 0});
   }
 
