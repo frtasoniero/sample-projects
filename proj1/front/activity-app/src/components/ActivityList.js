@@ -7,7 +7,7 @@ export default function ActivityList(props) {
       {props.activities.map(item =>
         <Activities
           editActivity={props.editActivity}
-          deleteActivity={props.deleteActivity}
+          toggleDeleteModal={props.toggleDeleteModal}
           item={item}
           key={item.id}
         />
