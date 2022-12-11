@@ -3,52 +3,38 @@ import React from "react";
 export default function Activities(props) {
   function priorityValue(value) {
     switch (value) {
-      case "1":
-        return "Low";
-        break;
-      case "2":
-        return "Normal";
-        break;
-      case "3":
-        return "High";
-        break;
+      case "Low":
+      case "Normal":
+      case "High":
+        return value
       default:
         return "Undefined";
-        break;
     }
   }
 
   function priorityLabel(value) {
     switch (value) {
-      case "1":
+      case "Low":
         return "smile";
-        break;
-      case "2":
+      case "Normal":
         return "meh";
-        break;
-      case "3":
+      case "High":
         return "frown";
-        break;
       default:
         return "undefined";
-        break;
     }
   }
 
   function priorityStyle(value) {
     switch (value) {
-      case "1":
+      case "Low":
         return "success";
-        break;
-      case "2":
+      case "Normal":
         return "light";
-        break;
-      case "3":
+      case "High":
         return "warning";
-        break;
       default:
         return "dark";
-        break;
     }
   }
 
