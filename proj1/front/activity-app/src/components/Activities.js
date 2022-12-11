@@ -73,7 +73,7 @@ export default function Activities(props) {
           </button>
           <button
             className="btn btn-sm btn-outline-danger"
-            onClick={() => props.deleteActivity(props.item.id)}
+            onClick={() => props.toggleDeleteModal(props.item.id)}
           >
             <i className="fas fa-trash me-2" />
             delete
