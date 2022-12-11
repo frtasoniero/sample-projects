@@ -32,11 +32,11 @@ namespace ActivityApp.API.Controllers
         }
 
         [HttpPost]
-        public IEnumerable<Activity> Post(Activity activity)
+        public Activity Post(Activity activity)
         {
             this.context.Activities.Add(activity);
 
-            if (this.context.SaveChanges() > 0) { return this.context.Activities; }
+            if (this.context.SaveChanges() > 0) { return this.context.Activities.FirstOrDefault(item => item.Id == activity.Id); }
             else throw new Exception("Cannot add a new activity!");
         }
 

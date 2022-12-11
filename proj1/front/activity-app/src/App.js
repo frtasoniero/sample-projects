@@ -4,23 +4,9 @@ import ActivityForm from './components/ActivityForm'
 import ActivityList from './components/ActivityList'
 import api from './api/activity'
 
-let initialState = [
-  // {
-  //   id: 1,
-  //   description: 'Book One',
-  //   priority: "1",
-  //   title: 'Lord of the Rings',
-  // },
-  // {
-  //   id: 2,
-  //   description: 'Book Two',
-  //   priority: "2",
-  //   title: 'The Dark Tower',
-  // }
-];
+let initialState = [];
 
 function App() {
-  const [index] = useState(0);
   const [activities, setActivities] = useState(initialState);
   const [activity, setActivity] = useState({id: 0});
 
@@ -37,8 +23,9 @@ function App() {
     getActivities();
   }, []);
 
-  function addActivity(activity) {
-    setActivities([...activities, { ...activity, id: index }]);
+  const addActivity = async (activity) => {
+    const response = await api.post('Activity', activity);
+    setActivities([...activities, response.data]);
   };
 
   function editActivity(id) {
@@ -47,14 +34,16 @@ function App() {
     setActivity(activityFilter[0]);
   }
 
-  function deleteActivity(id) {
-    const activitiesFilter = activities.filter(item => item.id !== id);
-
-    setActivities([...activitiesFilter]);
+  const deleteActivity = async (id) => {
+    if (await api.delete(`Activity/${id}`)) {
+      const activitiesFilter = activities.filter(item => item.id !== id);
+      setActivities([...activitiesFilter]);
+    }
   }
 
-  function updateActivity(activity) {
-    setActivities(activities.map((item) => (item.id === activity.id ? activity : item)));
+  const updateActivity = async (activity) => {
+    const response = await api.put(`Activity/${activity.id}`, activity);
+    setActivities(activities.map((item) => (item.id === response.data.id ? response.data : item)));
     setActivity({id: 0});
   }
 
