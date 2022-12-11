@@ -46,7 +46,6 @@ export default function ActivityForm(props) {
 
   return (
     <>
-    <h1>Activity {activity.id !== 0 ? activity.id : ''}</h1>
     <form className="row g-3 mt-2" onSubmit={handleSubmit}>
       <div className="col-md-6">
         <label className="form-label">Title</label>
@@ -93,7 +92,7 @@ export default function ActivityForm(props) {
             className="btn btn-outline-primary"
             type="submit"
           >
-            <i className="fas fa-plus me-2"></i>Activity
+            <i className="fas fa-plus me-2"></i>Save
           </button>
           :
           <>
