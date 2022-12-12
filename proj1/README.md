@@ -23,10 +23,12 @@ $ npm install
 ## Configure BackEnd
 ### Create migrations
 ```
-$ dotnet ef migrations add <name> -o Data/Migrations
+$ cd src/
+$ dotnet ef migrations add <name> -p ActivityApp.Data -s ActivityApp.API
 ```
 
 ### Update database
 ```
-$ dotnet ef database update
+$ cd src/
+$ dotnet ef database update -s ActivityApp.API
 ```

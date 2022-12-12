@@ -1,5 +1,5 @@
-﻿namespace ActivityApp.API.Models
-{
+﻿namespace ActivityApp.Domain.Entities 
+{ 
     public enum Priority
     {
         Undefined,
