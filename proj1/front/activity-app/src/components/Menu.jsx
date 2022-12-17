@@ -7,12 +7,12 @@ function BasicExample() {
   return (
     <Navbar bg="light" expand="lg">
       <Container>
-        <Navbar.Brand href="#home">ActivityApp</Navbar.Brand>
+        <Navbar.Brand href="/">ActivityApp</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="#home">Client</Nav.Link>
-            <Nav.Link href="#link">Activities</Nav.Link>
+            <Nav.Link href="/client/list">Client</Nav.Link>
+            <Nav.Link href="/activity/list">Activities</Nav.Link>
           </Nav>
           <Nav>
             <NavDropdown align="end" title="Felipe" id="basic-nav-dropdown">
