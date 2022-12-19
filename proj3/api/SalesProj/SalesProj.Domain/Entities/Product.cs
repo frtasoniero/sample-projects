@@ -50,7 +50,7 @@ namespace SalesProj.Domain.Entities
             
             DomainExceptionValidation.When(stock < 0, "Invalid stock value!");
 
-            DomainExceptionValidation.When(image.Length > 255, "Invalid image name! Max. of 255 characters.");
+            DomainExceptionValidation.When(image?.Length > 255, "Invalid image name! Max. of 255 characters.");
 
             Name = name;
             Description = description;
