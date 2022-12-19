@@ -6,4 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SalesProj.Infra.IoC\SalesProj.Infra.IoC.csproj" />
+  </ItemGroup>
+
 </Project>
