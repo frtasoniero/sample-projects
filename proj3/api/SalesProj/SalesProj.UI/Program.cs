@@ -1,6 +1,12 @@
+using SalesProj.Infra.IoC;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+var provider = builder.Services.BuildServiceProvider();
+var configuration = provider.GetRequiredService<IConfiguration>();
+
+builder.Services.AddInfrastructure(configuration);
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
