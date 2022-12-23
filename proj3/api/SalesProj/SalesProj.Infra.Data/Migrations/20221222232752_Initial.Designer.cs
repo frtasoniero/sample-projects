@@ -11,7 +11,7 @@ using SalesProj.Infra.Data.Context;
 namespace SalesProj.Infra.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221222224815_Initial")]
+    [Migration("20221222232752_Initial")]
     partial class Initial
     {
         /// <inheritdoc />

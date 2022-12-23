@@ -4,9 +4,9 @@ using SalesProj.Domain.Entities;
 
 namespace SalesProj.Application.Mapping
 {
-    public class DomainToDTOMappgin : Profile
+    public class DomainToDTOMapping : Profile
     {
-        public DomainToDTOMappgin() 
+        public DomainToDTOMapping() 
         {
             CreateMap<Category, CategoryDTO>().ReverseMap();
             CreateMap<Product, ProductDTO>().ReverseMap();

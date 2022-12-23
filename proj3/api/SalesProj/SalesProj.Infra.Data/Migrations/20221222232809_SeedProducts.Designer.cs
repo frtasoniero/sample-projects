@@ -11,7 +11,7 @@ using SalesProj.Infra.Data.Context;
 namespace SalesProj.Infra.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221222225142_SeedProducts")]
+    [Migration("20221222232809_SeedProducts")]
     partial class SeedProducts
     {
         /// <inheritdoc />
