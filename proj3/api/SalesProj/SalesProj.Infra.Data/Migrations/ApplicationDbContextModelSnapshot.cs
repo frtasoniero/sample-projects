@@ -92,7 +92,7 @@ namespace SalesProj.Infra.Data.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Producties");
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("SalesProj.Domain.Entities.Product", b =>

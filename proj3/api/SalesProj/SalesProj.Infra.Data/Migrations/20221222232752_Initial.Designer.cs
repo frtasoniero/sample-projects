@@ -11,8 +11,8 @@ using SalesProj.Infra.Data.Context;
 namespace SalesProj.Infra.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221220045530_SeedProducts")]
-    partial class SeedProducts
+    [Migration("20221222232752_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -95,7 +95,7 @@ namespace SalesProj.Infra.Data.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Producties");
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("SalesProj.Domain.Entities.Product", b =>

@@ -11,7 +11,9 @@ namespace SalesProj.Infra.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.Sql("INSERT INTO Products(Name, Description, Price, Stock, Image, CategoryId) " +
-                "VALUES('Book', 'Hobbit', 75.50, 'book.jpg', 1)");
+                "VALUES('HyperX Keyboard', 'Mechanic Keyboard from HyperX', 599.90, 150, 'hyperx_keyboard.jpg', 2)");
+            migrationBuilder.Sql("INSERT INTO Products(Name, Description, Price, Stock, Image, CategoryId) " +
+                "VALUES('Notebook', 'HP 360', 3100.00, 100, 'hp_notebook.jpg', 1)");
         }
 
         /// <inheritdoc />
