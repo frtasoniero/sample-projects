@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SalesProj.Application.Interfaces;
@@ -27,6 +28,9 @@ namespace SalesProj.Infra.IoC
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IProductService, ProductService>();
             services.AddAutoMapper(typeof(DomainToDTOMapping));
+
+            var myHandlers = AppDomain.CurrentDomain.Load("SalesProj.Application");
+            services.AddMediatR(myHandlers);
 
             return services;
         }
