@@ -11,7 +11,7 @@ using SalesProj.Infra.Data.Context;
 namespace SalesProj.Infra.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221222232752_Initial")]
+    [Migration("20221224201316_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -72,8 +72,8 @@ namespace SalesProj.Infra.Data.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Image")
                         .IsRequired()

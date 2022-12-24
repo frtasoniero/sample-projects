@@ -7,7 +7,7 @@ namespace SalesProj.Application.Products.Handlers
 {
     public class ProductUpdateCommandHandler : IRequestHandler<ProductUpdateCommand, Product>
     {
-        private IProductRepository _productRepository;
+        private readonly IProductRepository _productRepository;
 
         public ProductUpdateCommandHandler(IProductRepository productRepository)
         {

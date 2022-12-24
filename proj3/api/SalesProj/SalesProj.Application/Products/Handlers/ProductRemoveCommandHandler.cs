@@ -7,7 +7,7 @@ namespace SalesProj.Application.Products.Handlers
 {
     public class ProductRemoveCommandHandler : IRequestHandler<ProductRemoveCommand, Product>
     {
-        private IProductRepository _productRepository;
+        private readonly IProductRepository _productRepository;
 
         public ProductRemoveCommandHandler(IProductRepository productRepository)
         {
