@@ -7,11 +7,11 @@ namespace SalesProj.Application.Products.Handlers
 {
     public class GetProductByIdHandler : IRequestHandler<GetProductByIdQuery, Product>
     {
-        private IProductRepository _productRepository;
+        private readonly IProductRepository _productRepository;
 
         public GetProductByIdHandler(IProductRepository productRepository)
         {
-            _productRepository = productRepository ?? throw new ArgumentNullException(nameof(productRepository));
+            _productRepository = productRepository;
         }
         public async Task<Product> Handle(GetProductByIdQuery request, CancellationToken cancellationToken)
         {

@@ -4,7 +4,6 @@ using SalesProj.Application.DTOs;
 using SalesProj.Application.Interfaces;
 using SalesProj.Application.Products.Commands;
 using SalesProj.Application.Products.Queries;
-using SalesProj.Domain.Entities;
 
 namespace SalesProj.Application.Services
 {

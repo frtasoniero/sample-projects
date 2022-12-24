@@ -9,7 +9,7 @@ namespace SalesProj.Application.Services
     public class CategoryService : ICategoryService
     {
         private ICategoryRepository _categoryRepository;
-        private IMapper _mapper;
+        private readonly IMapper _mapper;
 
         public CategoryService(ICategoryRepository categoryRepository, IMapper mapper)
         {

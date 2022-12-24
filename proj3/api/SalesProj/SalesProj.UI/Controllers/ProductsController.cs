@@ -2,14 +2,13 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SalesProj.Application.DTOs;
 using SalesProj.Application.Interfaces;
-using SalesProj.Application.Services;
 
 namespace SalesProj.UI.Controllers
 {
     public class ProductsController : Controller
     {
-        private IProductService _productService;
-        private ICategoryService _categoryService;
+        private readonly IProductService _productService;
+        private readonly ICategoryService _categoryService;
         private readonly IWebHostEnvironment _environment;
 
         public ProductsController(IProductService productService, ICategoryService categoryService, IWebHostEnvironment environment)
@@ -34,14 +33,14 @@ namespace SalesProj.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(ProductDTO product)
+        public async Task<IActionResult> Create(ProductDTO productDto)
         {
             if (ModelState.IsValid)
             {
-                await _productService.Add(product);
+                await _productService.Add(productDto);
                 return RedirectToAction(nameof(Index));
             }
-            return View(product);
+            return View(productDto);
         }
 
         [HttpGet()]
@@ -59,15 +58,15 @@ namespace SalesProj.UI.Controllers
             return View(productDto);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Edit(ProductDTO product)
+        [HttpPost()]
+        public async Task<IActionResult> Edit(ProductDTO productDto)
         {
             if (ModelState.IsValid)
             {
-                await _productService.Update(product);
+                await _productService.Update(productDto);
                 return RedirectToAction(nameof(Index));
             }
-            return View(product);
+            return View(productDto);
         }
 
         [HttpGet()]
@@ -86,21 +85,18 @@ namespace SalesProj.UI.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             await _productService.Remove(id);
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null) return NotFound();
-
             var productDto = await _productService.GetById(id);
 
             if (productDto == null) return NotFound();
-
             var wwwroot = _environment.WebRootPath;
             var image = Path.Combine(wwwroot, "images\\" + productDto.Image);
             var exists = System.IO.File.Exists(image);
-
             ViewBag.ImageExist = exists;
 
             return View(productDto);
