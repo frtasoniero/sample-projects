@@ -14,4 +14,8 @@
     <ProjectReference Include="..\SalesProj.Infra.IoC\SalesProj.Infra.IoC.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
 </Project>
