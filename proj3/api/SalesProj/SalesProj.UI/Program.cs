@@ -1,3 +1,4 @@
+using SalesProj.Domain.Account;
 using SalesProj.Infra.IoC;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,6 +25,19 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+using (var serviceScope = app.Services.CreateScope())
+{
+    var services = serviceScope.ServiceProvider;
+
+    var myDependency = services.GetRequiredService<ISeedUserRoleInitial>();
+
+    //Use the service
+    myDependency.SeedRoles();
+    myDependency.SeedUsers();
+
+}
+
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

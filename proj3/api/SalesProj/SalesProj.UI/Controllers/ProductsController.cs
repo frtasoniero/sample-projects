@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SalesProj.Application.DTOs;
 using SalesProj.Application.Interfaces;
+using System.Data;
 
 namespace SalesProj.UI.Controllers
 {
@@ -69,6 +71,7 @@ namespace SalesProj.UI.Controllers
             return View(productDto);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet()]
         public async Task<IActionResult> Delete(int? id)
         {
