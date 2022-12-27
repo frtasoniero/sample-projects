@@ -1,7 +1,14 @@
+import { DataIcon, HomeIcon, SettingsIcon } from "../icons";
+import MenuItem from "./MenuItem";
+
 export default function SideMenu() {
     return (
         <aside>
-            <h1>Menu</h1>
+            <ul>
+                <MenuItem url="/" text="Home" icon={HomeIcon}></MenuItem>
+                <MenuItem url="/settings" text="Settings" icon={SettingsIcon}></MenuItem>
+                <MenuItem url="/data" text="Data" icon={DataIcon}></MenuItem>
+            </ul>
         </aside>
     )
 }
