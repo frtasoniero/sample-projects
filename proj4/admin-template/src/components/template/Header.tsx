@@ -1,4 +1,5 @@
-import SideMenu from "./SideMenu"
+import useAppData from "../../data/hook/useAppData"
+import ThemeButton from "./ThemeButton"
 import Title from "./Title"
 
 interface HeaderProps {
@@ -7,10 +8,15 @@ interface HeaderProps {
 }
 
 export default function Header(props: HeaderProps) {
+    const { theme, changeTheme } = useAppData()
+
     return (
     <>
-        <div>
+        <div className={`flex flex-row`}>
             <Title title={props.title} subtitle={props.subtitle}></Title>
+            <div className={`flex flex-grow justify-end`}>
+                <ThemeButton theme={theme} changeTheme={changeTheme}></ThemeButton>
+            </div>
         </div>
     </>
     )
