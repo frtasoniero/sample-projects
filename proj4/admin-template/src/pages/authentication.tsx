@@ -1,15 +1,30 @@
 import { useState } from "react";
 import AuthInput from "../components/auth/AuthInput";
+import { AttentionIcon } from "../components/icons";
 
 export default function Authentication() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [pageMode, setPageMode] = useState<'login' | 'signin'>('login')
+    const [error, setError] = useState('')
+
+    function displayError(msg, timeInSec=5) {
+        setError(msg)
+        setTimeout(() => setError(''), timeInSec * 1000)
+    }
 
     function submit() {
-        if (pageMode === 'login') console.log('login')
-        else console.log('signin')
+        if (pageMode === 'login') 
+        {
+            console.log('login')
+            displayError("An error has occured while login!")
+        }
+        else 
+        {
+            console.log('signin')
+            displayError("An error has occured while signin!")
+        }
     }
 
     return (
@@ -27,6 +42,16 @@ export default function Authentication() {
                 `}>
                     {pageMode === 'login' ? 'Enter you account' : 'Create your account'}
                 </h1>
+                {error ? (
+                    <div className={`
+                        flex items-center bg-red-400 text-white py-3 px-5 my-2 border border-red-700 rounded-lg
+                    `}>
+                        {AttentionIcon(6)}
+                        <span className={`ml-3`}>{error}</span>
+                    </div>
+                ) : (
+                    <div></div>
+                )}
                 <AuthInput
                     label="Email"
                     value={email}
@@ -87,7 +112,7 @@ export default function Authentication() {
                             cursor-pointer
                             ml-1
                         `}>
-                            SignIn.
+                            LogIn.
                         </a>
                     </p>
                 )}
