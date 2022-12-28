@@ -4,12 +4,29 @@ import AuthInput from "../components/auth/AuthInput";
 export default function Authentication() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [confirm, setConfirm] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
+    const [pageMode, setPageMode] = useState<'login' | 'signin'>('login')
+
+    function submit() {
+        if (pageMode === 'login') console.log('login')
+        else console.log('signin')
+    }
 
     return (
-        <>
-            <div>
-                <h1>Authentication</h1>
+        <div className={`flex h-screen items-center justify-center`}>
+            <div className={`hidden md:block md:w-1/2`}>
+                <img 
+                    src="https://source.unsplash.com/random" 
+                    alt="Image from authentication page" 
+                    className={`h-screen w-full object-cover`}
+                />
+            </div>
+            <div className={`m-10 w-full md:w-1/2`}>
+                <h1 className={`
+                    text-xl font-bold mb-5
+                `}>
+                    {pageMode === 'login' ? 'Enter you account' : 'Create your account'}
+                </h1>
                 <AuthInput
                     label="Email"
                     value={email}
@@ -26,13 +43,55 @@ export default function Authentication() {
                 ></AuthInput>
                 <AuthInput
                     label="Confirm password"
-                    value={confirm}
+                    value={confirmPassword}
                     type='password'
-                    changeValue={setConfirm}
+                    changeValue={setConfirmPassword}
                     required
-                    notRenderWhen //or notRenderWhen={false} to render the confirmation
+                    notRenderWhen={pageMode === 'login'} //notRenderWhen={false} to render the confirmation
                 ></AuthInput>
+                
+                <button onClick={submit} className={`
+                    w-full bg-indigo-500 hover:bg-indigo-400 text-white rounded-lg px-4 py-3 mt-6
+                `}>
+                    {pageMode === 'login' ? 'Login' : 'Create a new account'}
+                </button>
+
+                <hr className={`my-6 border-gray-300 w-full`}/>
+
+                <button onClick={submit} className={`
+                    w-full bg-red-500 hover:bg-red-400 text-white rounded-lg px-4 py-3
+                `}>
+                    Enter with Google
+                </button>
+
+                {pageMode === 'login' ? (
+                    <p className={`mt-8`}>
+                        First access?
+                        <a onClick={() => setPageMode('signin')} className={`
+                            text-blue-500
+                            hover:text-blue-700
+                            font-semibold
+                            cursor-pointer
+                            ml-1
+                        `}>
+                            Create a new account.
+                        </a>
+                    </p>
+                ) : (
+                    <p className={`mt-8`}>
+                        Already have an account?
+                        <a onClick={() => setPageMode('login')} className={`
+                            text-blue-500
+                            hover:text-blue-700
+                            font-semibold
+                            cursor-pointer
+                            ml-1
+                        `}>
+                            SignIn.
+                        </a>
+                    </p>
+                )}
             </div>
-        </>
+        </div>
     )
 }
