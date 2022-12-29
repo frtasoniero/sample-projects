@@ -12,7 +12,7 @@ export default function Authentication() {
     const [pageMode, setPageMode] = useState<'login' | 'signin'>('login')
     const [error, setError] = useState('')
 
-    function displayError(msg, timeInSec=5) {
+    function displayError(msg: string, timeInSec=5) {
         setError(msg)
         setTimeout(() => setError(''), timeInSec * 1000)
     }

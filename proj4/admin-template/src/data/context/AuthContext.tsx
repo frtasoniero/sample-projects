@@ -1,16 +1,14 @@
 import { createContext, useState } from "react";
 import firebase from "../../firebase/config";
 import User from "../../model/User";
-import route from "next/router"
+import { useRouter } from "next/router"
 
 interface AuthContextProps {
     user?: User
     loginGoogle?: () => Promise<void>
 }
 
-const AuthContext = createContext<AuthContextProps>({
-
-})
+const AuthContext = createContext<AuthContextProps>({})
 
 async function userNormalized(userFirebase: firebase.User): Promise<User> {
     const token = await userFirebase.getIdToken()
@@ -26,8 +24,9 @@ async function userNormalized(userFirebase: firebase.User): Promise<User> {
 
 export function AuthProvider(props: any) {
     const [user, setUser] = useState<User>()
+    const router = useRouter()
 
-    async function googleLogin() {
+    async function loginGoogle() {
         const resp = await firebase.auth().signInWithPopup(
             new firebase.auth.GoogleAuthProvider()
         )
@@ -35,19 +34,17 @@ export function AuthProvider(props: any) {
         if (resp.user?.email) {
             const user = await userNormalized(resp.user)
             setUser(user)
-            route.push('/')
+            router.push('/')
         }
     }
 
     return (
-        <>
-            <AuthContext.Provider value={{
-                user,
-                googleLogin
-            }}>
-                {props.children}
-            </AuthContext.Provider>
-        </>
+        <AuthContext.Provider value={{
+            user,
+            loginGoogle
+        }}>
+            {props.children}
+        </AuthContext.Provider>
     )
 }
 
