@@ -1,8 +1,11 @@
 import { useState } from "react";
 import AuthInput from "../components/auth/AuthInput";
 import { AttentionIcon } from "../components/icons";
+import useAuthData from "../data/hook/useAuthData";
 
 export default function Authentication() {
+    const { user, loginGoogle } = useAuthData()
+
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
@@ -83,7 +86,7 @@ export default function Authentication() {
 
                 <hr className={`my-6 border-gray-300 w-full`}/>
 
-                <button onClick={submit} className={`
+                <button onClick={loginGoogle} className={`
                     w-full bg-red-500 hover:bg-red-400 text-white rounded-lg px-4 py-3
                 `}>
                     Enter with Google
